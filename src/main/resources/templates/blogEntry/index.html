@@ -1,16 +1,39 @@
 <!DOCTYPE html>
 <html xmlns:th="https://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- To import a fragment from one of our other templates we can use the th:replace command: -->
+    <th:block th:replace="~{fragments/template.html :: head-setup}"></th:block>
+    <title>My Blog</title>
+  </head>
 
-<head>
-	<!-- To import a fragment from one of our other templates we can use the th:replace command: -->
-	<th:block th:replace="~{fragments/template.html :: head-setup}"></th:block>
-	<title>My Blog</title>
-</head>
-
-<body>
+  <body>
     <th:block th:replace="~{fragments/template.html :: navbar}"></th:block>
-	<h1>Home Page</h1>
-	<th:block th:replace="~{fragments/template.html :: end-setup}"></th:block>
-</body>
-
+    <div class="container">
+      <h1>My Blog</h1>
+      <!-- This row will be our place to iteratively
+        render each of our blogEntries
+        Similar to rendering an array of components in react
+        using the .map() method, we can use th:each
+        to render a particular set of HTML for EACH
+        member of our List<BlogEntry>
+    -->
+      <!-- We pass syntax to th:each that looks like
+        enhanced for loop syntax:    
+    -->
+      <div class="row" th:each="entry : ${blogEntries}">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title" th:text="${entry.getTitle()}"></p>
+              <div class="card-text">
+                <p>By: <span th:text="${entry.getAuthor()}"></span></p>
+                <p th:text="${entry.getBlogContent()}"></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <th:block th:replace="~{fragments/template.html :: end-setup}"></th:block>
+  </body>
 </html>
