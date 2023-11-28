@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- To import a fragment from one of our other templates we can use the th:replace command: -->
+    <th:block th:replace="~{fragments/template.html :: head-setup}"></th:block>
+    <title>New Blog Entry</title>
+  </head>
+
+  <body>
+    <th:block th:replace="~{fragments/template.html :: navbar}"></th:block>
+    <div class="container">
+      <h1>New Blog Entry</h1>
+      <form>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Blog Entry Title..."
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Blog Author..."
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            placeholder="Blog Content..."
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">
+          Submit new Blog Entry
+        </button>
+      </form>
+    </div>
+
+    <th:block th:replace="~{fragments/template.html :: end-setup}"></th:block>
+  </body>
+</html>

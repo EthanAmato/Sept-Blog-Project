@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- To import a fragment from one of our other templates we can use the th:replace command: -->
+    <th:block th:replace="~{fragments/template.html :: head-setup}"></th:block>
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Welcome to my Blog!</h1>
+    <!-- This p tag will be 'filled out' with data sent from our controller -->
+    <p th:text="${message}">Default Message</p>
+
+    <th:block th:replace="~{fragments/template.html :: end-setup}"></th:block>
+
+  </body>
+</html>

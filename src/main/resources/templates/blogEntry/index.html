@@ -1,12 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+	<!-- To import a fragment from one of our other templates we can use the th:replace command: -->
+	<th:block th:replace="~{fragments/template.html :: head-setup}"></th:block>
+	<title>My Blog</title>
 </head>
+
 <body>
-    <h1>Welcome to my Blog!</h1>
+    <th:block th:replace="~{fragments/template.html :: navbar}"></th:block>
+	<h1>Home Page</h1>
+	<th:block th:replace="~{fragments/template.html :: end-setup}"></th:block>
 </body>
+
 </html>
