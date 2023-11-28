@@ -1,8 +1,13 @@
 package com.tts.blogproject.controllers;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+import com.tts.blogproject.models.BlogEntry;
+import com.tts.blogproject.repositories.BlogEntryRepository;
 
 // This class will be responsible for taking in requests from the user and routing them accordingly
 // e.g. If they send a post request to /new, create a new blog entry using the body sent with that request
@@ -14,6 +19,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class BlogEntryController {
+	
+	
+	@Autowired
+	BlogEntryRepository blogEntryRepository;
+	
 	
 	// Listening in for Get requests to "/" route, Spring Boot will
 	// send the user to the index.html file found in either the blogEntry folder inside of
@@ -53,11 +63,22 @@ public class BlogEntryController {
 	}
 	
 	@GetMapping("/new")
-	public String newPost() {
+	public String newPost(Model model) {
+		BlogEntry blogEntry = new BlogEntry();
+		model.addAttribute("blogEntry", blogEntry);
 		
 		return "blogEntry/new.html";
 	}
 	
+	
+	@PostMapping("/blogEntries")
+	public String createNewBlogEntry(BlogEntry blogEntry) {
+		System.out.println(blogEntry);
+		BlogEntry dbBlogEntry = blogEntryRepository.save(blogEntry);
+		
+		System.out.println(dbBlogEntry);
+		return "blogEntry/new.html";
+	}
 	
 	
 	
