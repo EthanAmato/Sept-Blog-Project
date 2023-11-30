@@ -29,6 +29,23 @@
                 <p>By: <span th:text="${entry.getAuthor()}"></span></p>
                 <p th:text="${entry.getBlogContent()}"></p>
               </div>
+              <div class="d-flex">
+                <!-- We want to make sure that the 'id' in our route
+                actually wil point to the corresponding id of each rendered blog entry
+              for example, if the blogEntry has id of 4, we want the route that this
+            anchor tag will point to to become /blogposts/4 -->
+                  <a class="btn btn-primary"
+                    th:href="@{/blogEntries/{id} (id=${entry.getId()})}"
+                  > 
+                    Edit Entry
+                  </a>
+                  <form
+                    th:action="@{/blogEntries/{id} (id=${entry.getId()})}"
+                    th:method="delete"
+                  >
+                    <button type="submit" class="btn btn-danger">Delete Entry</button>
+                  </form>
+              </div>
             </div>
           </div>
         </div>

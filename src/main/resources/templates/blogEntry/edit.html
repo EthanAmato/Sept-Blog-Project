@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- To import a fragment from one of our other templates we can use the th:replace command: -->
+    <th:block th:replace="~{fragments/template.html :: head-setup}"></th:block>
+    <title>New Blog Entry</title>
+  </head>
+
+  <body>
+    <th:block th:replace="~{fragments/template.html :: navbar}"></th:block>
+    <div class="container">
+      <h1>New Blog Entry</h1>
+      <!-- We can give our form something called a th:action - this specifies the URL for a form's action attribute - if we send a post request
+    from our form it will send it to this url.
+        We will also define something called a th:object - essentially when we submit / open our form, this object will be a binding contract
+        between the form and the properties/instance variables of an object (specifically a blogEntry object) - we need to specify a blank copy
+        of a blogEntry object from our controller for the form to 'fill out' and send back to another controller method
+        Lastly, we need to specify that this form is sending a post request - we can do that with the method attribute:
+
+        In summary, using thymeleaf, we are telling SB that this form will send a POST request to 
+        the URL /blogEntries with request body of an object called blogEntry
+-->
+      <form th:action="@{/blogEntries/{id} (id=${blogEntry.getId()})}" th:object="${blogEntry}" th:method="patch">
+        <div class="form-group">
+
+            <!-- For each of our inputs (which will be tied to a particular column/instance variable for our blogEntry),
+            we must specify the th:field to tell Thymeleaf which input maps onto which column: -->
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{title}"
+            placeholder="Blog Entry Title..."
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{author}"
+            placeholder="Blog Author..."
+          />
+        </div>
+        <div class="form-group">
+          <input
+            type="text"
+            class="form-control"
+            th:field="*{blogContent}"
+            placeholder="Blog Content..."
+          />
+        </div>
+        <button class="btn btn-primary" type="submit">
+          Update Blog Entry
+        </button>
+      </form>
+    </div>
+
+    <th:block th:replace="~{fragments/template.html :: end-setup}"></th:block>
+  </body>
+</html>

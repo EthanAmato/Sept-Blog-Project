@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en">
+  <head>
+    <!-- To import a fragment from one of our other templates we can use the th:replace command: -->
+    <th:block th:replace="~{fragments/template.html :: head-setup}"></th:block>
+    <title>Document</title>
+  </head>
+  <body>
+    <th:block th:replace="~{fragments/template.html :: navbar}"></th:block>
+    <div class="container">
+      <h1>Here's your blog entry!</h1>
+      <p>Thank you for your submission</p>
+      <p>Blog Entry:</p>
+      <div class="row">
+        <div class="col-md-12">
+          <div class="card">
+            <div class="card-body">
+              <p class="card-title" th:text="${newBlogEntry.getTitle()}"></p>
+              <div class="card-text">
+                <p>By: <span th:text="${newBlogEntry.getAuthor()}"></span></p>
+                <p th:text="${newBlogEntry.getBlogContent()}"></p>
+              </div>
+              <a th:href="@{/}" class="btn btn-success">Back to Home</a>
+              <a th:href="@{/new}" class="btn btn-primary"
+                >Create a new Entry</a
+              >
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <th:block th:replace="~{fragments/template.html :: end-setup}"></th:block>
+  </body>
+</html>
